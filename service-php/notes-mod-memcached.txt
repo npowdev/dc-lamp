@@ -1,0 +1,39 @@
+[memcached.org]
+---------------
+
+dependencies:
+-------------
+libs:   libevent, https://www.monkey.org/~provos/libevent/ (libevent-dev)
+        libseccomp, (optional, experimental, linux) - enables process restrictions for better security. Tested only on x86-64 architectures.
+        openssl, (optional) - enables TLS support. need relatively up to date version.
+
+[memcached php mod]
+
+need libs:  libmemcached-dev, libsasl2 (for SASL support)
+
+[mod input]
+-----------
+libmemcached directory [no] : 
+zlib directory [no] : 
+use system fastlz [no] : 
+enable igbinary serializer [no] : 
+enable msgpack serializer [no] :
+enable json serializer [no] : 
+enable server protocol [no] : 
+enable sasl [yes] :
+enable sessions [yes] : 
+
+[setup try run]
+---------------
+agyni libmemcached-dev
+pecl install memcached <<EOF
+no
+no
+no
+no
+no
+no
+no
+yes
+yes
+EOF

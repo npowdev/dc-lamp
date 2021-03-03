@@ -1,0 +1,6 @@
+Configuration File (php.ini) Path: /usr/local/etc/php
+Loaded Configuration File:         (none)
+Scan for additional .ini files in: /usr/local/etc/php/conf.d
+Additional .ini files parsed:      /usr/local/etc/php/conf.d/docker-php-ext-sodium.ini,
+/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+

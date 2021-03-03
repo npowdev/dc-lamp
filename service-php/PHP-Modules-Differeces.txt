@@ -1,0 +1,86 @@
+Status Info:  + need add/install; - = need remove; = = no install/remove need;
+              i = install; c = ext. configure; l = pre install/load needed library
+              p = pecl install; e = ext. enable; g = get download; 
+              s = need settings or ini options; / = inapplicable, impossible; 
+Columns Mark of Web/Host/Docker:
+  #1 Module exist by default [+|-|?  ]:   exist, missing, unknown info
+  #2 Module have to change   [+|-|m|/]:   add, remove, modify only, no change
+  #3 Module need extra work  [*|x|/  ]:   extra attention, extended work, nothing
+-------------------------------------------------------------------------------
+Stats | PHP Modules 7.4   | Host PHP Info | Docker -m | Changes
+-------------------------------------------------------------------------------
+/     | apache2handler    | -             | +/*       | [only on php-apache server]
++pes  | apcu              | +             | -+/       | inst.: pecl install apcu; +enable; ini: "apc.shm_size=8M"
++i    | bcmath            | +             | -+/       | inst.: bcmath
++li   | bz2               | +             | -+/       | inst.: bz2; load: libbz2-dev; (--with-bz2 ?)
++i    | calendar          | +             | -+/       | inst.: calendar (--enable-calendar ?)
+/     | cgi-fcgi          | +             | -/*       | [only on php-fpm server usable]
+=s    | Core              | +             | +/*       | ini: "disable_functions=..." [...]
+=     | ctype             | +             | +//       | 
+=     | curl              | +             | +//       | 
+=     | date              | +             | +//       | 
++lgci | dba               | +             | -+x       | get: https://fossies.org/linux/misc/qdbm-1.8.78.tar.gz (cfg --enable-stable --enable-zlib --enable-bzip --enable-iconv) ; inst.: dba (--with-cdb --with-qdbm); handlers: cdb cdb_make inifile flatfile qdbm 
+=     | dom               | +             | +//       | 
++i    | exif              | +             | -+/       | inst.: exif
+=     | fileinfo          | +             | +//       | 
+=     | filter            | +             | +//       | 
+=     | ftp               | +             | +//       | 
++lci  | gd                | +             | -+/       | inst.: gd; cfg (php74+): --enable-gd --with-freetype --with-jpeg --with-webp; load: libfreetype6-dev libjpeg62-turbo-dev libjpeg-dev libpng-dev libxpm-dev libvpx-dev libwebp-dev libwebp6
++i    | gettext           | +             | -+        | inst.: gettext
++i    | gmp               | +             | -+        | inst.: gmp
+=ic   | hash              | +             | +//       | [inst.: hash; get mhash emu. in hash with cfg: --with-mhash]
+=     | iconv             | +             | +//       | 
++     | igbinary          | +             | -+        | ???
++lpes | imagick           | +             | -+*       | inst.: pecl install imagick; +enable; load: libmagickwand-dev; ini: imagick.skip_version_check=true
++lic  | imap              | +             | -+/       | inst.: imap; cfg: --with-kerberos --with-imap-ssl; load: libc-client-dev libkrb5-dev
++     | intl              | +             | -+        | ???
+=     | ionCube Loader    | +             | -/*       | use +enable opcache
+=     | json              | +             | +//       | 
+=     | libxml            | +             | +//       | 
+=     | mbstring          | +             | +//       | 
++lpe  | memcached         | +             | -+*       | inst.: pecl install memcached; +enable; load: libmemcached-dev; TODO: enable igbinary json msgpack support
++pe   | msgpack           | +             | -+/       | inst.: pecl install msgpack; +enable
+=     | mcrypt            | -             | -/*       | For PHP <= v7.3 [inst.: pecl install mcrypt-1.0.3; +enable; load: libmcrypt-dev]
+=     | mhash             | -             | -m*       | emu. in hash with cfg: --with-mhash
++     | mysqli            | +             | -+/       | inst.: mysqli
+=     | mysqlnd           | +             | +//       | 
+=     | openssl           | +             | +//       | 
+=     | pcntl             | -             | -/*       | Only php/php-fpm < v7.4 [inst.: pcntl]
+=     | pcre              | +             | +//       | 
+=     | PDO               | +             | +//       | 
++i    | pdo_mysql         | +             | -+        | 
++li   | pdo_pgsql         | +             | -+        | inst.: pdo_pgsql; load: libpq-dev
+=     | pdo_sqlite        | +             | +//       | 
++li   | pgsql             | +             | -+        | inst.: pgsql; load: libpq-dev
+=     | Phar              | +             | +//       | 
+=     | posix             | +             | +//       | 
+/     | readline          | -             | -/*       | [no disable possible]
++lpe  | redis             | +             | -+*       | inst.: printf "y\n\n" | pecl install redis-5.3.2; +enable; Need igbinary serializer and use printf to enable it and disable lzf, zstd
+=     | Reflection        | +             | +//       | 
+=s    | session           | +             | +//       | ini: (...)
++i    | shmop             | +             | -+/       | inst.: shmop
+=     | SimpleXML         | +             | +//       | 
++li   | soap              | +             | -+/       | inst.: soap; load: libxml2-dev
++i    | sockets           | +             | -+/       | inst.: sockets
+=     | sodium            | +             | +//       | [disable with: rm -f /usr/local/etc/php/conf.d/docker-php-ext-sodium.ini]
+=     | SPL               | +             | +//       | 
+=     | sqlite3           | +             | +//       | 
+=     | standard          | +             | +//       | 
++i    | sysvmsg           | +             | -+/       | inst.: sysvmsg
++i    | sysvsem           | +             | -+/       | inst.: sysvsem
++i    | sysvshm           | +             | -+/       | inst.: sysvshm
+=     | tokenizer         | +             | +//       | 
+-li   | wddx              | -             | -//       | [inst.: wddx; load: libexpat1-dev]
++pe   | xdebug            | -             | ++*       | inst.: pecl install xdebug; +enable; need inifile options
+=     | xml               | +             | +//       | 
+=     | xmlreader         | +             | +//       | 
++li   | xmlrpc            | +             | -+/       | inst.: xmlrpc; load: libxml2-dev
+=     | xmlwriter         | +             | +//       | 
++i+   | xsl               | +             | -+/       | inst.: xsl; load: libxslt1-dev
+=es   | opcache           | +             | +/*       | +enable; ini: "opcache.enable_file_override=On" "opcache.force_restart_timeout=60" "opcache.revalidate_freq=30" "opcache.revalidate_path=On" 
++     | zip               | +             | -+/       | 
+=     | zlib              | +             | +//       | 
+
+[Zend Modules]
+the ionCube PHP Loader (enabled) + Intrusion Protection from ioncube24.com (unconfigured)
+
