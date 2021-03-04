@@ -19,22 +19,22 @@
   // 
   // Add the IDs of extensions you want installed when the container is created.
   "extensions": [
-	"ms-azuretools.vscode-docker",
-	"github.vscode-pull-request-github",
-	"eamodio.gitlens",
-	"codezombiech.gitignore",
-	"tombonnike.vscode-status-bar-format-toggle",
-	"bierner.github-markdown-preview",
-	"deerawan.vscode-faker",
-	"humao.rest-client",
-	"ionutvmi.path-autocomplete",
-	"donjayamanne.githistory",
-	"piotrpalarz.vscode-gitignore-generator",
-	"eiminsasete.apacheconf-snippets",
-	"mpty.pack-apache",
-	"yzhang.markdown-all-in-one",
-	"davidanson.vscode-markdownlint"
-],
+    "ms-azuretools.vscode-docker",
+    "github.vscode-pull-request-github",
+    "eamodio.gitlens",
+    "codezombiech.gitignore",
+    "tombonnike.vscode-status-bar-format-toggle",
+    "bierner.github-markdown-preview",
+    "deerawan.vscode-faker",
+    "humao.rest-client",
+    "ionutvmi.path-autocomplete",
+    "donjayamanne.githistory",
+    "piotrpalarz.vscode-gitignore-generator",
+    "eiminsasete.apacheconf-snippets",
+    "mpty.pack-apache",
+    "yzhang.markdown-all-in-one",
+    "davidanson.vscode-markdownlint"
+  ],
   // 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   "forwardPorts": [
