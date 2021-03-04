@@ -34,7 +34,9 @@ ENV QDBM_URL="https://fossies.org/linux/misc/qdbm-1.8.78.tar.gz"
 #            "http://fallabs.com/qdbm/qdbm-1.8.78.tar.gz"
 #            "https://dbmx.net/qdbm/qdbm-1.8.78.tar.gz"
 
-# [Optional] Uncomment this section to install additional OS packages.
+# -----------------------------------------------------------------------------
+# Install additional OS packages.
+# -----------------------------------------------------------------------------
 RUN apt-get update -yq && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -yq install --no-install-recommends --no-install-suggests \
     # tools
@@ -42,7 +44,8 @@ RUN apt-get update -yq && export DEBIAN_FRONTEND=noninteractive \
     # libs
     zlib1g-dev libzip-dev libicu-dev libsqlite3-dev libsqlite3-0 \
     # -------------------------------------------------------------------------
-    # For extensions
+    # Package for php extensions
+    # -------------------------------------------------------------------------
     && apt-get install -yq --no-install-recommends --no-install-suggests \
     # For gmp
     libgmp-dev \
@@ -108,20 +111,36 @@ RUN apt-get update -yq && export DEBIAN_FRONTEND=noninteractive \
     # Clean up
     && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/*
 
-# PHP74 Extensions
+# -----------------------------------------------------------------------------
+# Instal and setup PHP Extensions
+# -----------------------------------------------------------------------------
 RUN set -eu \
-    # new mod tray
     # -------------------------------------------------------------------------
+    # Package on php - disabled, not needed, or outdated.
     # -------------------------------------------------------------------------
-    # pre-bundled package on php74-apache - no setup needed.
+    # # mcrypt (mcrypt-1.0.3 for php7.2+) need lib: libmcrypt-dev
+    # && pecl install mcrypt-1.0.3 \
+    # && docker-php-ext-enable mcrypt \
+    # # hash with mhash need cfg: --with-mhash
+    # && docker-php-ext-configure hash --with-mhash \
+    # && docker-php-ext-install hash \
+    # # pcntl
+    # && docker-php-ext-install pcntl \
+    # # wddx need lib: libexpat1-dev
+    # && docker-php-ext-install wddx \
+    #
+    # -------------------------------------------------------------------------
+    # Pre-bundled package on php - no install needed.
+    # -------------------------------------------------------------------------
     # && docker-php-ext-install pdo_sqlite \
     # && docker-php-ext-install curl \
     # && docker-php-ext-install tokenizer \
     # && docker-php-ext-install json \
-    # mbstring need lib: libonig-dev
+    # # mbstring need lib: libonig-dev
     # && docker-php-ext-install mbstring \
-    # # wddx need lib: libexpat1-dev
-    # && docker-php-ext-install wddx \
+    #
+    # -------------------------------------------------------------------------
+    # New package on php - not pre-bundled - need install.
     # -------------------------------------------------------------------------
     && docker-php-ext-install bcmath \
     # bz2 need lib: libbz2-dev
@@ -147,19 +166,6 @@ RUN set -eu \
     #      need cfg: --with-kerberos --with-imap-ssl
     && docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
     && docker-php-ext-install imap \
-    #
-    # # mcrypt need lib: libmcrypt-dev
-    #      enable ver: mcrypt-1.0.3 for php7.2+
-    # && pecl install mcrypt-1.0.3 \
-    # && docker-php-ext-enable mcrypt \
-    # # hash with mhash need cfg: --with-mhash
-    # && docker-php-ext-configure hash --with-mhash \
-    # && docker-php-ext-install hash \
-    #
-    ## # pcntl
-    ## #       TODO Maybe need to disable functions in php core!
-    ## && docker-php-ext-install pcntl \
-    #
     # shmop (Shared Memory)
     && docker-php-ext-install shmop \
     # soap need lib: libxml2-dev
@@ -181,8 +187,8 @@ RUN set -eu \
     #               qdbm: get "https://fossies.org/linux/misc/qdbm-1.8.78.tar.gz"
     #                     cfg/make/inst: --enable-stable --enable-zlib --enable-bzip --enable-lzo --enable-iconv
     #     need cfg: --with-cdb --with-qdbm \
+    #   failed cfg: --with-db4 
     && docker-php-ext-configure dba --with-cdb --with-qdbm --with-lmdb \
-    # --with-db4 
     && docker-php-ext-install dba \
     # -------------------------------------------------------------------------
     # Install gd with Freetype
@@ -275,8 +281,8 @@ RUN set -eu \
     && echo "xdebug.default_enable=0" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     # && echo "xdebug.remote_host=host.docker.internal" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "xdebug.remote_port=9000" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-    # && echo "xdebug.remote_connect_back=0" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-    # && echo "xdebug.profiler_enable=0" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-    # && echo "xdebug.remote_log=\"/tmp/xdebug.log\"" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.remote_connect_back=0" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.profiler_enable=0" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.remote_log=\"/tmp/xdebug.log\"" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     # -------------------------------------------------------------------------
     && rm -rf /tmp/*
