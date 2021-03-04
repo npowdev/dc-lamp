@@ -118,7 +118,6 @@ RUN set -eu \
     # -------------------------------------------------------------------------
     # Package on php - disabled, not needed, or outdated.
     # -------------------------------------------------------------------------
-    # mcrypt (mcrypt-1.0.3 for php7.2+) need lib: libmcrypt-dev
     # :> pecl install mcrypt-1.0.3 && docker-php-ext-enable mcrypt
     # hash with mhash need cfg: --with-mhash
     # :> docker-php-ext-configure hash --with-mhash && docker-php-ext-install hash
@@ -137,28 +136,6 @@ RUN set -eu \
     # mbstring need lib: libonig-dev
     # :> docker-php-ext-install mbstring
     #
-    # -------------------------------------------------------------------------
-    # New package on php - not pre-bundled - need install.
-    # -------------------------------------------------------------------------
-    && docker-php-ext-install bcmath \
-    # bz2 need lib: libbz2-dev
-    && docker-php-ext-install bz2 \
-    && docker-php-ext-install calendar \
-    && docker-php-ext-install pdo_mysql \
-    && docker-php-ext-install mysqli \
-    && docker-php-ext-install zip \
-    && docker-php-ext-install -j$(nproc) intl \
-    && docker-php-ext-install gettext \
-    # gmp need lib: libgmp-dev
-    && docker-php-ext-install gmp \
-    && docker-php-ext-install exif \
-    # apcu
-    && pecl install apcu \
-    && docker-php-ext-enable apcu \
-    && echo "apc.shm_size=8M" >> /usr/local/etc/php/conf.d/docker-php-ext-apcu.ini \
-    # pdo_pgsql
-    && docker-php-ext-install -j$(nproc) pdo_pgsql \
-    # pgsql
     && docker-php-ext-install -j$(nproc) pgsql \
     # imap need lib: libc-client-dev libkrb5-dev
     #      need cfg: --with-kerberos --with-imap-ssl
