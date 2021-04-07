@@ -25,15 +25,17 @@
     "codezombiech.gitignore",
     "tombonnike.vscode-status-bar-format-toggle",
     "bierner.github-markdown-preview",
+    "yzhang.markdown-all-in-one",
     "deerawan.vscode-faker",
     "humao.rest-client",
     "ionutvmi.path-autocomplete",
     "donjayamanne.githistory",
     "piotrpalarz.vscode-gitignore-generator",
+    "davidanson.vscode-markdownlint",
+    "mrmlnc.vscode-apache",
     "eiminsasete.apacheconf-snippets",
-    "mpty.pack-apache",
-    "yzhang.markdown-all-in-one",
-    "davidanson.vscode-markdownlint"
+    "alefragnani.project-manager",
+    "oderwat.indent-rainbow"
   ],
   // 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
