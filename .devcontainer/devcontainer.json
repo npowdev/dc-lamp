@@ -30,10 +30,12 @@
     "ionutvmi.path-autocomplete",
     "donjayamanne.githistory",
     "piotrpalarz.vscode-gitignore-generator",
-    "eiminsasete.apacheconf-snippets",
-    "mpty.pack-apache",
     "yzhang.markdown-all-in-one",
-    "davidanson.vscode-markdownlint"
+    "davidanson.vscode-markdownlint",
+    "mrmlnc.vscode-apache",
+    "eiminsasete.apacheconf-snippets",
+    "alefragnani.project-manager",
+    "oderwat.indent-rainbow"
   ],
   // 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
